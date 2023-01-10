@@ -13,10 +13,11 @@ function sortAccountsByLastName(accounts) {
 
   // It returns a _number_ that represents the number of times the account's ID appears in any book's `borrows` array.
 function getTotalNumberOfBorrows(account, books) {
-  return results = books.reduce((acc, book) => {
-    const countPerBook = books.borrows.reduce((accBorrow, borrow) => {
+  return books.reduce((acc, book) => {
+    const countPerBook = book.borrows.reduce((accBorrow, borrow) => {
       return borrow.id === account.id ? accBorrow + 1 : accBorrow
     }, 0)
+    return acc + countPerBook;
   }, 0)
 }
 
