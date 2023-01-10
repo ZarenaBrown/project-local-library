@@ -13,12 +13,15 @@ function sortAccountsByLastName(accounts) {
 
   // It returns a _number_ that represents the number of times the account's ID appears in any book's `borrows` array.
 function getTotalNumberOfBorrows(account, books) {
-  return books.reduce((acc, book) => {
-    const countPerBook = book.borrows.reduce((accBorrow, borrow) => {
-      return borrow.id === account.id ? accBorrow + 1 : accBorrow
+  const total = books.reduce((totalBorrows, book) => {
+    const countPerBook = book.borrows.reduce((currentBorrowsTotal, borrow) => {
+       if(borrow.id === account.id) currentBorrowsTotal+=1;
+      return currentBorrowsTotal
     }, 0)
-    return acc + countPerBook;
+    totalBorrows+=countPerBook
+    return totalBorrows
   }, 0)
+  return total;
 }
 
   // It returns an array of book objects, including author information, that represents all books _currently checked out_ by the given account. _Look carefully at the object below,_ as it's not just the book object; the author object is nested inside of it.
